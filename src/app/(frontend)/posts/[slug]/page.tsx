@@ -1,6 +1,6 @@
 import NextImage from 'next/image'
 import { notFound } from 'next/navigation'
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { RichText } from '@/components/RichText'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
