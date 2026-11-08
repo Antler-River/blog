@@ -392,7 +392,7 @@ export interface CalloutBlock {
  * via the `definition` "CodeBlock".
  */
 export interface CodeBlock {
-  language: 'ts' | 'bash' | 'css';
+  language: 'TypeScript' | 'Bash' | 'CSS';
   code: string;
   id?: string | null;
   blockName?: string | null;

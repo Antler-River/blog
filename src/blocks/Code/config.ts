@@ -9,7 +9,7 @@ export const CodeBlock: Block = {
       type: 'select',
       required: true,
       defaultValue: 'ts',
-      options: ['ts', 'bash', 'css'],
+      options: ['TypeScript', 'Bash', 'CSS'],
     },
     { name: 'code', type: 'textarea', required: true },
   ],
