@@ -1,4 +1,7 @@
 import type { CollectionConfig } from 'payload'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { CalloutBlock } from '../blocks/Callout/config'
+import { CodeBlock } from '../blocks/Code/config'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -15,6 +18,15 @@ export const Posts: CollectionConfig = {
     { name: 'publishedAt', type: 'date', admin: { position: 'sidebar' } },
     { name: 'coverImage', type: 'upload', relationTo: 'media' },
     { name: 'excerpt', type: 'textarea' },
-    { name: 'content', type: 'richText' },
+    {
+      name: 'content',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({ blocks: [CalloutBlock, CodeBlock] }),
+        ],
+      }),
+    },
   ],
 }

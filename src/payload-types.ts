@@ -378,6 +378,28 @@ export interface CollectionsWidget {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalloutBlock".
+ */
+export interface CalloutBlock {
+  style: 'info' | 'warning' | 'tip';
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CodeBlock".
+ */
+export interface CodeBlock {
+  language: 'TypeScript' | 'Bash' | 'CSS';
+  code: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'code';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
