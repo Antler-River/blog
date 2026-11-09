@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { HeroBlock } from '../blocks/Hero/config'
 import { ContentBlock } from '../blocks/Content/config'
+import { CTABlock } from '../blocks/CTA/config'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -9,6 +10,6 @@ export const Pages: CollectionConfig = {
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { position: 'sidebar' } },
-    { name: 'layout', type: 'blocks', blocks: [HeroBlock, ContentBlock] },
+    { name: 'layout', type: 'blocks', blocks: [HeroBlock, ContentBlock, CTABlock] },
   ],
 }

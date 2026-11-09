@@ -203,7 +203,7 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  layout?: (HeroBlock | ContentBlock)[] | null;
+  layout?: (HeroBlock | ContentBlock | CTABlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -242,6 +242,19 @@ export interface ContentBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock".
+ */
+export interface CTABlock {
+  heading: string;
+  text?: string | null;
+  buttonLabel: string;
+  buttonUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -392,6 +405,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         hero?: T | HeroBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
+        cta?: T | CTABlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -413,6 +427,18 @@ export interface HeroBlockSelect<T extends boolean = true> {
  */
 export interface ContentBlockSelect<T extends boolean = true> {
   body?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock_select".
+ */
+export interface CTABlockSelect<T extends boolean = true> {
+  heading?: T;
+  text?: T;
+  buttonLabel?: T;
+  buttonUrl?: T;
   id?: T;
   blockName?: T;
 }
