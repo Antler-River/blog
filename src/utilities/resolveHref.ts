@@ -1,13 +1,27 @@
-import type { Page } from '@/payload-types'
+import type { Category, Page, Post } from '@/payload-types'
+
+type Reference =
+  | { relationTo: 'pages'; value: number | Page }
+  | { relationTo: 'posts'; value: number | Post }
+  | { relationTo: 'categories'; value: number | Category }
 
 type LinkTarget = {
-  type?: 'page' | 'url' | null
-  page?: number | Page | null
+  type?: 'reference' | 'url' | null
+  reference?: Reference | null
   url?: string | null
+}
+
+const prefixes: Record<Reference['relationTo'], string> = {
+  pages: '',
+  posts: '/posts',
+  categories: '/categories',
 }
 
 export function resolveHref(link: LinkTarget | null | undefined): string {
   if (link?.type === 'url') return link.url ?? '#'
-  if (link?.page && typeof link.page === 'object') return `/${link.page.slug}`
-  return '#'
+
+  const ref = link?.reference
+  if (!ref || typeof ref.value !== 'object') return '#'
+
+  return `${prefixes[ref.relationTo]}/${ref.value.slug}`
 }
