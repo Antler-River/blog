@@ -18,9 +18,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound()
 
   const cover = typeof post.coverImage === 'object' ? post.coverImage : null
-  const categories = (post.categories ?? []).filter(
-  (c): c is Category => typeof c === 'object',
-  )
+  const categories = (post.categories ?? []).filter((c): c is Category => typeof c === 'object')
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-16">
@@ -28,8 +26,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <ul className="mt-4 flex flex-wrap gap-2">
         {categories.map((category) => (
           <li key={category.id}>
-            <NextLink href={`/categories/${category.slug}`} className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200">
-            {category.title}
+            <NextLink
+              href={`/categories/${category.slug}`}
+              className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200"
+            >
+              {category.title}
             </NextLink>
           </li>
         ))}

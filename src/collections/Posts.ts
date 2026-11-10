@@ -14,7 +14,14 @@ export const Posts: CollectionConfig = {
   },
   fields: [
     { name: 'title', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { position: 'sidebar' } },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true,
+      index: true,
+      admin: { position: 'sidebar' },
+    },
     { name: 'publishedAt', type: 'date', admin: { position: 'sidebar' } },
     { name: 'coverImage', type: 'upload', relationTo: 'media' },
     { name: 'excerpt', type: 'textarea' },
