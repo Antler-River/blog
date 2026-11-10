@@ -530,16 +530,40 @@ export interface Header {
         label: string;
         kind?: ('link' | 'dropdown') | null;
         link?: {
-          type?: ('page' | 'url') | null;
-          page?: (number | null) | Page;
+          type?: ('reference' | 'url') | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: number | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: number | Post;
+              } | null)
+            | ({
+                relationTo: 'categories';
+                value: number | Category;
+              } | null);
           url?: string | null;
           newTab?: boolean | null;
         };
         children?:
           | {
               label: string;
-              type?: ('page' | 'url') | null;
-              page?: (number | null) | Page;
+              type?: ('reference' | 'url') | null;
+              reference?:
+                | ({
+                    relationTo: 'pages';
+                    value: number | Page;
+                  } | null)
+                | ({
+                    relationTo: 'posts';
+                    value: number | Post;
+                  } | null)
+                | ({
+                    relationTo: 'categories';
+                    value: number | Category;
+                  } | null);
               url?: string | null;
               newTab?: boolean | null;
               id?: string | null;
@@ -565,7 +589,7 @@ export interface HeaderSelect<T extends boolean = true> {
           | T
           | {
               type?: T;
-              page?: T;
+              reference?: T;
               url?: T;
               newTab?: T;
             };
@@ -574,7 +598,7 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               label?: T;
               type?: T;
-              page?: T;
+              reference?: T;
               url?: T;
               newTab?: T;
               id?: T;

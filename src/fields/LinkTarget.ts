@@ -4,18 +4,18 @@ export const linkTargetFields: Field[] = [
   {
     name: 'type',
     type: 'radio',
-    defaultValue: 'page',
+    defaultValue: 'reference',
     options: [
-      { label: 'Page', value: 'page' },
+      { label: 'Internal', value: 'reference' },
       { label: 'External URL', value: 'url' },
     ],
     admin: { layout: 'horizontal' },
   },
   {
-    name: 'page',
+    name: 'reference',
     type: 'relationship',
-    relationTo: 'pages',
-    admin: { condition: (_, siblingData) => siblingData?.type === 'page' },
+    relationTo: ['pages', 'posts', 'categories'],
+    admin: { condition: (_, siblingData) => siblingData?.type === 'reference' },
   },
   {
     name: 'url',
