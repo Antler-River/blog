@@ -28,5 +28,12 @@ export const Posts: CollectionConfig = {
         ],
       }),
     },
+    {
+      name: 'categories',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: true,
+      admin: { position: 'sidebar' },
+    },
   ],
 }

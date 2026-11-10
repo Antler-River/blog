@@ -1,5 +1,6 @@
 import * as migration_20261109_194514_initial from './20261109_194514_initial';
 import * as migration_20261109_203601_add_blob_fields from './20261109_203601_add_blob_fields';
+import * as migration_20261109_231642_add_categories from './20261109_231642_add_categories';
 
 export const migrations = [
   {
@@ -10,6 +11,11 @@ export const migrations = [
   {
     up: migration_20261109_203601_add_blob_fields.up,
     down: migration_20261109_203601_add_blob_fields.down,
-    name: '20261109_203601_add_blob_fields'
+    name: '20261109_203601_add_blob_fields',
+  },
+  {
+    up: migration_20261109_231642_add_categories.up,
+    down: migration_20261109_231642_add_categories.down,
+    name: '20261109_231642_add_categories'
   },
 ];

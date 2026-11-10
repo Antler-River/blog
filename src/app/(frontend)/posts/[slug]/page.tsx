@@ -1,8 +1,10 @@
 import NextImage from 'next/image'
+import NextLink from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@/components/RichText'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import type { Category } from '@/payload-types'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -16,10 +18,22 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound()
 
   const cover = typeof post.coverImage === 'object' ? post.coverImage : null
+  const categories = (post.categories ?? []).filter(
+  (c): c is Category => typeof c === 'object',
+  )
 
   return (
     <article className="mx-auto max-w-2xl px-4 py-16">
       <h1 className="text-4xl font-bold tracking-tight">{post.title}</h1>
+      <ul className="mt-4 flex flex-wrap gap-2">
+        {categories.map((category) => (
+          <li key={category.id}>
+            <NextLink href={`/categories/${category.slug}`} className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm hover:bg-gray-200">
+            {category.title}
+            </NextLink>
+          </li>
+        ))}
+      </ul>
       {cover?.url && (
         <NextImage
           src={cover.url}
