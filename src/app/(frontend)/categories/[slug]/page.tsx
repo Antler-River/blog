@@ -20,7 +20,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         sort: '-publishedAt',
     })
 
-  return (
+return (
     <div className="mx-auto max-w-2xl px-4 py-16">
         <h1 className="text-4xl font-bold tracking-tight">{category.title}</h1>
         <ul className="mt-10 space-y-10">
@@ -39,5 +39,5 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             ))}
         </ul>
     </div>
-  )
+)
 }
