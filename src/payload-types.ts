@@ -72,6 +72,7 @@ export interface Config {
     posts: Post;
     pages: Page;
     categories: Category;
+    'guestbook-entries': GuestbookEntry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'guestbook-entries': GuestbookEntriesSelect<false> | GuestbookEntriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -278,6 +280,17 @@ export interface CTABlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guestbook-entries".
+ */
+export interface GuestbookEntry {
+  id: number;
+  name: string;
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -319,6 +332,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'guestbook-entries';
+        value: number | GuestbookEntry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -476,6 +493,16 @@ export interface CTABlockSelect<T extends boolean = true> {
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guestbook-entries_select".
+ */
+export interface GuestbookEntriesSelect<T extends boolean = true> {
+  name?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
