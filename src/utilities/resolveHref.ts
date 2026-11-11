@@ -6,8 +6,9 @@ type Reference =
   | { relationTo: 'categories'; value: number | Category }
 
 type LinkTarget = {
-  type?: 'reference' | 'url' | null
+  type?: 'reference' | 'url' | 'route' | null
   reference?: Reference | null
+  route?: string | null
   url?: string | null
 }
 
@@ -19,6 +20,7 @@ const prefixes: Record<Reference['relationTo'], string> = {
 
 export function resolveHref(link: LinkTarget | null | undefined): string {
   if (link?.type === 'url') return link.url ?? '#'
+  if (link?.type === 'route') return link.route ?? '#'
 
   const ref = link?.reference
   if (!ref || typeof ref.value !== 'object') return '#'

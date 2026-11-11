@@ -7,6 +7,7 @@ import * as migration_20261110_214422_nav_bugfix from './20261110_214422_nav_bug
 import * as migration_20261111_005248_guestbook from './20261111_005248_guestbook';
 import * as migration_20261111_005735_guestbook from './20261111_005735_guestbook';
 import * as migration_20261111_020727_guestbook from './20261111_020727_guestbook';
+import * as migration_20261111_021609_guestbook from './20261111_021609_guestbook';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20261111_020727_guestbook.up,
     down: migration_20261111_020727_guestbook.down,
-    name: '20261111_020727_guestbook'
+    name: '20261111_020727_guestbook',
+  },
+  {
+    up: migration_20261111_021609_guestbook.up,
+    down: migration_20261111_021609_guestbook.down,
+    name: '20261111_021609_guestbook'
   },
 ];

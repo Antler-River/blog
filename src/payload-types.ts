@@ -557,7 +557,7 @@ export interface Header {
         label: string;
         kind?: ('link' | 'dropdown') | null;
         link?: {
-          type?: ('reference' | 'url') | null;
+          type?: ('reference' | 'url' | 'route') | null;
           reference?:
             | ({
                 relationTo: 'pages';
@@ -572,12 +572,13 @@ export interface Header {
                 value: number | Category;
               } | null);
           url?: string | null;
+          route?: ('/' | '/guestbook') | null;
           newTab?: boolean | null;
         };
         children?:
           | {
               label: string;
-              type?: ('reference' | 'url') | null;
+              type?: ('reference' | 'url' | 'route') | null;
               reference?:
                 | ({
                     relationTo: 'pages';
@@ -592,6 +593,7 @@ export interface Header {
                     value: number | Category;
                   } | null);
               url?: string | null;
+              route?: ('/' | '/guestbook') | null;
               newTab?: boolean | null;
               id?: string | null;
             }[]
@@ -618,6 +620,7 @@ export interface HeaderSelect<T extends boolean = true> {
               type?: T;
               reference?: T;
               url?: T;
+              route?: T;
               newTab?: T;
             };
         children?:
@@ -627,6 +630,7 @@ export interface HeaderSelect<T extends boolean = true> {
               type?: T;
               reference?: T;
               url?: T;
+              route?: T;
               newTab?: T;
               id?: T;
             };
