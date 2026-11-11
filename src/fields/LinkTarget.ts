@@ -8,6 +8,7 @@ export const linkTargetFields: Field[] = [
     options: [
       { label: 'Internal', value: 'reference' },
       { label: 'External URL', value: 'url' },
+      { label: 'Site route', value: 'route' },
     ],
     admin: { layout: 'horizontal' },
   },
@@ -21,6 +22,15 @@ export const linkTargetFields: Field[] = [
     name: 'url',
     type: 'text',
     admin: { condition: (_, siblingData) => siblingData?.type === 'url' },
+  },
+  {
+    name: 'route',
+    type: 'select',
+    options: [
+      { label: 'Home', value: '/' },
+      { label: 'Guestbook', value: '/guestbook' },
+    ],
+    admin: { condition: (_, siblingData) => siblingData?.type === 'route' },
   },
   { name: 'newTab', type: 'checkbox', label: 'Open in new tab' },
 ]

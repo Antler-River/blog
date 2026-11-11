@@ -11,6 +11,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Categories } from './collections/Categories'
+import { GuestbookEntries } from './collections/GuestbookEntries'
+
 import { Header } from './globals/Header'
 
 const filename = fileURLToPath(import.meta.url)
@@ -23,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Posts, Pages, Categories],
+  collections: [Users, Media, Posts, Pages, Categories, GuestbookEntries],
   globals: [Header],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
