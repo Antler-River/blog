@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CalloutBlock } from '../blocks/Callout/config'
 import { CodeBlock } from '../blocks/Code/config'
+import { revalidatePost, revalidatePostDelete } from '@/hooks/revalidatePost'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -43,4 +44,8 @@ export const Posts: CollectionConfig = {
       admin: { position: 'sidebar' },
     },
   ],
+  hooks: {
+    afterChange: [revalidatePost],
+    afterDelete: [revalidatePostDelete],
+  },
 }

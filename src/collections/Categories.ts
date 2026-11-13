@@ -1,3 +1,4 @@
+import { revalidateCategory, revalidateCategoryDelete } from '@/hooks/revalidateCategory'
 import type { CollectionConfig } from 'payload'
 
 export const Categories: CollectionConfig = {
@@ -15,4 +16,8 @@ export const Categories: CollectionConfig = {
       admin: { position: 'sidebar' },
     },
   ],
+  hooks: {
+    afterChange: [revalidateCategory],
+    afterDelete: [revalidateCategoryDelete],
+  },
 }
