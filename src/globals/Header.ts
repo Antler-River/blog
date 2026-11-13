@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { linkTargetFields } from '../fields/LinkTarget'
+import { revalidateHeader } from '@/hooks/revalidateHeader'
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -36,4 +37,5 @@ export const Header: GlobalConfig = {
       ],
     },
   ],
+  hooks: { afterChange: [revalidateHeader] },
 }

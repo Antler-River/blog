@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { HeroBlock } from '../blocks/Hero/config'
 import { ContentBlock } from '../blocks/Content/config'
 import { CTABlock } from '../blocks/CTA/config'
+import { revalidatePage, revalidatePageDelete } from '@/hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -19,4 +20,8 @@ export const Pages: CollectionConfig = {
     },
     { name: 'layout', type: 'blocks', blocks: [HeroBlock, ContentBlock, CTABlock] },
   ],
+  hooks: {
+    afterChange: [revalidatePage],
+    afterDelete: [revalidatePageDelete],
+  },
 }
