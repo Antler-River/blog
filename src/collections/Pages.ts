@@ -8,6 +8,7 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: { useAsTitle: 'title' },
   access: { read: () => true },
+  versions: { drafts: true },
   fields: [
     { name: 'title', type: 'text', required: true },
     {

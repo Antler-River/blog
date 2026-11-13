@@ -6,7 +6,9 @@ export const revalidateCategory: CollectionAfterChangeHook<Category> = ({
   doc,
   previousDoc,
   req,
+  context,
 }) => {
+  if (context.disableRevalidate) return doc
   req.payload.logger.info(`Revalidating category: ${doc.slug}`)
 
   revalidatePath(`/categories/${doc.slug}`)
