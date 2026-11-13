@@ -132,6 +132,18 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "_pages_v_latest_idx" ON "_pages_v" USING btree ("latest");
   CREATE INDEX "posts__status_idx" ON "posts" USING btree ("_status");
   CREATE INDEX "pages__status_idx" ON "pages" USING btree ("_status");`)
+  for (const collection of ['posts', 'pages'] as const) {
+    const { docs } = await payload.find({ collection, pagination: false, req })
+    for (const doc of docs) {
+      await payload.update({
+        collection,
+        id: doc.id,
+        data: { _status: 'published' },
+        req,
+        context: { disableRevalidate: true },
+      })
+    }
+  }
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {

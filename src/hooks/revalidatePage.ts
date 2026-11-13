@@ -2,7 +2,13 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 import { revalidatePath } from 'next/cache'
 import type { Page } from '@/payload-types'
 
-export const revalidatePage: CollectionAfterChangeHook<Page> = ({ doc, previousDoc, req }) => {
+export const revalidatePage: CollectionAfterChangeHook<Page> = ({
+  doc,
+  previousDoc,
+  req,
+  context,
+}) => {
+  if (context.disableRevalidate) return doc
   if (doc._status === 'published') {
     req.payload.logger.info(`Revalidating page: ${doc.slug}`)
     revalidatePath(`/${doc.slug}`)
