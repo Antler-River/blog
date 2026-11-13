@@ -8,7 +8,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const payload = await getPayload({ config })
   const { docs } = await payload.find({
     collection: 'categories',
-    where: { slug: { equals: slug } },
+    where: {
+      and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }],
+    },
     limit: 1,
   })
   const category = docs[0]

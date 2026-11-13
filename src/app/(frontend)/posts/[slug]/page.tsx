@@ -11,7 +11,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const payload = await getPayload({ config })
   const { docs } = await payload.find({
     collection: 'posts',
-    where: { slug: { equals: slug } },
+    where: {
+      and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }],
+    },
     limit: 1,
   })
   const post = docs[0]

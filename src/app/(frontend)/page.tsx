@@ -6,7 +6,8 @@ export default async function HomePage() {
   const payload = await getPayload({ config })
   const { docs: posts } = await payload.find({
     collection: 'posts',
-    sort: '-publishedAt',
+    where: { _status: { equals: 'published' } },
+    limit: 1,
   })
 
   return (
