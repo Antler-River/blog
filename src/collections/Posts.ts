@@ -9,11 +9,18 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedAt'],
+    preview: (doc) => `/next/preview?path=${encodeURIComponent(`/posts/${doc.slug}`)}`,
+    livePreview: {
+      url: ({ data }) => `/next/preview?path=${encodeURIComponent(`/posts/${data.slug}`)}`,
+    },
   },
   access: {
     read: () => true,
   },
-  versions: { drafts: true },
+  versions: {
+    drafts: { autosave: { interval: 375 } },
+    maxPerDoc: 50,
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     {
