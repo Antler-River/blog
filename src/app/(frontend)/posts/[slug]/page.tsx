@@ -8,7 +8,6 @@ import type { Category } from '@/payload-types'
 import { draftMode } from 'next/headers'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  
   const { slug } = await params
   const payload = await getPayload({ config })
   const { isEnabled: draft } = await draftMode()
@@ -17,8 +16,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     collection: 'posts',
     draft,
     where: draft
-    ? { slug: { equals: slug } }
-    : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
+      ? { slug: { equals: slug } }
+      : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
     limit: 1,
   })
   const post = docs[0]
