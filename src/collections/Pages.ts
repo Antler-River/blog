@@ -6,7 +6,10 @@ import { revalidatePage, revalidatePageDelete } from '@/hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
-  admin: { useAsTitle: 'title' },
+  admin: { 
+    useAsTitle: 'title',
+    preview: (doc) => `/next/preview?path=${encodeURIComponent(`/${doc.slug}`)}`,
+  },
   access: { read: () => true },
   versions: { drafts: true },
   fields: [

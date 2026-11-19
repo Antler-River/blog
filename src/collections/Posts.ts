@@ -9,6 +9,7 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'publishedAt'],
+    preview: (doc) => `/next/preview?path=${encodeURIComponent(`/posts/${doc.slug}`)}`,
   },
   access: {
     read: () => true,
