@@ -9,6 +9,8 @@ import * as migration_20261111_005735_guestbook from './20261111_005735_guestboo
 import * as migration_20261111_020727_guestbook from './20261111_020727_guestbook'
 import * as migration_20261111_021609_guestbook from './20261111_021609_guestbook'
 import * as migration_20261113_220421_add_drafts from './20261113_220421_add_drafts'
+import * as migration_20261119_015520_add_autosave from './20261119_015520_add_autosave'
+import * as migration_20261119_015624_add_autosave_2 from './20261119_015624_add_autosave_2'
 
 export const migrations = [
   {
@@ -65,5 +67,15 @@ export const migrations = [
     up: migration_20261113_220421_add_drafts.up,
     down: migration_20261113_220421_add_drafts.down,
     name: '20261113_220421_add_drafts',
+  },
+  {
+    up: migration_20261119_015520_add_autosave.up,
+    down: migration_20261119_015520_add_autosave.down,
+    name: '20261119_015520_add_autosave',
+  },
+  {
+    up: migration_20261119_015624_add_autosave_2.up,
+    down: migration_20261119_015624_add_autosave_2.down,
+    name: '20261119_015624_add_autosave_2',
   },
 ]

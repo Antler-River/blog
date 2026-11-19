@@ -9,9 +9,15 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     preview: (doc) => `/next/preview?path=${encodeURIComponent(`/${doc.slug}`)}`,
+    livePreview: {
+      url: ({ data }) => `/next/preview?path=${encodeURIComponent(`/${data.slug}`)}`,
+    },
   },
   access: { read: () => true },
-  versions: { drafts: true },
+  versions: {
+    drafts: { autosave: { interval: 375 } },
+    maxPerDoc: 50,
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     {

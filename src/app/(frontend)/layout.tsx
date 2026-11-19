@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { SiteHeader } from '@/components/SiteHeader'
 import { draftMode } from 'next/headers'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export const metadata = {
   description: 'Blog',
@@ -19,6 +20,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        {draft && <RefreshRouteOnSave />}
         {draft && (
           <div className="bg-yellow-300 px-4 py-2 text-sm">
             Preview mode, showing drafts.{' '}
