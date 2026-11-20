@@ -5,6 +5,8 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { SITE_URL } from './utilities/siteUrl'
 
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
@@ -39,6 +41,16 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
+    seoPlugin({
+      collections: ['posts', 'pages'],
+      uploadsCollection: 'media',
+
+      generateTitle: ({ doc }) => doc?.title ?? '',
+      generateDescription: ({ doc }) => doc?.excerpt ?? '',
+
+      generateURL: ({ doc, collectionSlug }) =>
+        `${SITE_URL}${collectionSlug === 'posts' ? '/posts' : ''}/${doc?.slug ?? ''}`,
+    }),
     vercelBlobStorage({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
       alwaysInsertFields: true,
