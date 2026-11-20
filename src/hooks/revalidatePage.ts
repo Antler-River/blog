@@ -22,6 +22,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   if (previousDoc?._status === 'published' && doc._status !== 'published') {
     req.payload.logger.info(`Unpublishing page: ${previousDoc.slug}`)
     revalidatePath(`/${previousDoc.slug}`)
+    revalidatePath('/', 'layout')
   }
 
   return doc
