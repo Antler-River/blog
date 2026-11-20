@@ -30,12 +30,19 @@ export async function generateMetadata({
   const page = await getPage(slug, draft)
   if (!page) return {}
 
+  const title = page.meta?.title || page.title
+  const description = page.meta?.description || undefined
+  const image = page.meta?.image && typeof page.meta.image === 'object' ? page.meta.image : null
+
   return {
-    title: page.title,
+    title,
+    description,
     openGraph: {
       siteName: SITE_NAME,
       type: 'website',
-      title: page.title,
+      title,
+      description,
+      images: image?.url ? [{ url: image.url, alt: image.alt }] : undefined,
     },
   }
 }

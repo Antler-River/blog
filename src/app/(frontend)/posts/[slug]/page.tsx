@@ -33,19 +33,22 @@ export async function generateMetadata({
   const post = await getPost(slug, draft)
   if (!post) return {}
 
+  const title = post.meta?.title || post.title
+  const description = post.meta?.description || post.excerpt || undefined
+  const metaImage = post.meta?.image && typeof post.meta.image === 'object' ? post.meta.image : null
   const cover = post.coverImage && typeof post.coverImage === 'object' ? post.coverImage : null
-  const description = post.excerpt ?? undefined
+  const image = metaImage ?? cover
 
   return {
-    title: post.title,
+    title: title,
     description,
     openGraph: {
       siteName: SITE_NAME,
       type: 'article',
-      title: post.title,
+      title: title,
       description,
       publishedTime: post.publishedAt ?? undefined,
-      images: cover?.url ? [{ url: cover.url, alt: cover.alt }] : undefined,
+      images: image?.url ? [{ url: image.url, alt: image.alt }] : undefined,
     },
   }
 }
