@@ -6,7 +6,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { draftMode } from 'next/headers'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import type { Metadata } from 'next'
-import { SITE_URL } from '@/utilities/siteUrl'
+import { SITE_NAME, SITE_URL } from '@/utilities/siteUrl'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: '%s · Fluffy.space',
   },
   description: 'Personal website',
-  openGraph: { siteName: 'Fluffy.space', type: 'website' },
+  openGraph: { siteName: SITE_NAME, type: 'website' },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

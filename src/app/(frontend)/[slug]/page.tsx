@@ -5,6 +5,7 @@ import { RenderBlocks } from '@/components/RenderBlocks'
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 import type { Metadata } from 'next'
+import { SITE_NAME } from '@/utilities/siteUrl'
 
 const getPage = cache(async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config })
@@ -32,7 +33,7 @@ export async function generateMetadata({
   return {
     title: page.title,
     openGraph: {
-      siteName: 'Fluffy.space',
+      siteName: SITE_NAME,
       type: 'website',
       title: page.title,
     },

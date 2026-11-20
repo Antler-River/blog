@@ -8,6 +8,7 @@ import type { Category } from '@/payload-types'
 import { draftMode } from 'next/headers'
 import { cache } from 'react'
 import type { Metadata } from 'next'
+import { SITE_NAME } from '@/utilities/siteUrl'
 
 const getPost = cache(async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config })
@@ -39,7 +40,7 @@ export async function generateMetadata({
     title: post.title,
     description,
     openGraph: {
-      siteName: 'Fluffy.space',
+      siteName: SITE_NAME,
       type: 'article',
       title: post.title,
       description,
