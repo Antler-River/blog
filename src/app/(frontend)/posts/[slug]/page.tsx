@@ -6,12 +6,11 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import type { Category } from '@/payload-types'
 import { draftMode } from 'next/headers'
+import { cache } from 'react'
+import type { Metadata } from 'next'
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+const getPost = cache(async (slug: string, draft: boolean) => {
   const payload = await getPayload({ config })
-  const { isEnabled: draft } = await draftMode()
-
   const { docs } = await payload.find({
     collection: 'posts',
     draft,
@@ -20,7 +19,40 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       : { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
     limit: 1,
   })
-  const post = docs[0]
+  return docs[0] ?? null
+})
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const { isEnabled: draft } = await draftMode()
+  const post = await getPost(slug, draft)
+  if (!post) return {}
+
+  const cover = post.coverImage && typeof post.coverImage === 'object' ? post.coverImage : null
+  const description = post.excerpt ?? undefined
+
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      siteName: 'Fluffy.space',
+      type: 'article',
+      title: post.title,
+      description,
+      publishedTime: post.publishedAt ?? undefined,
+      images: cover?.url ? [{ url: cover.url, alt: cover.alt }] : undefined,
+    },
+  }
+}
+
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { isEnabled: draft } = await draftMode()
+  const post = await getPost(slug, draft)
   if (!post) notFound()
 
   const cover = typeof post.coverImage === 'object' ? post.coverImage : null
