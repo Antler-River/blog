@@ -16,6 +16,10 @@ export const linkTargetFields: Field[] = [
     name: 'reference',
     type: 'relationship',
     relationTo: ['pages', 'posts', 'categories'],
+    filterOptions: ({ relationTo }) => {
+      if (relationTo === 'categories') return true
+      return { _status: { equals: 'published' } }
+    },
     admin: { condition: (_, siblingData) => siblingData?.type === 'reference' },
   },
   {

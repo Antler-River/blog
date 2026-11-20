@@ -16,7 +16,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
-    where: { categories: { in: [category.id] } },
+    where: {
+      and: [{ categories: { in: [category.id] } }, { _status: { equals: 'published' } }],
+    },
     sort: '-publishedAt',
   })
 
