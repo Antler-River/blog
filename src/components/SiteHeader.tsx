@@ -4,7 +4,7 @@ import { resolveHref } from '@/utilities/resolveHref'
 import { NavDropdown } from './NavDropdown'
 
 type NavItem = NonNullable<Header['navItems']>[number]
-type NavLink = { label: string; href: string; newTab: boolean }
+export type NavLink = { label: string; href: string; newTab: boolean }
 type PreparedItem =
   | { kind: 'link'; id: string; link: NavLink }
   | { kind: 'dropdown'; id: string; label: string; links: NavLink[] }
@@ -53,4 +53,3 @@ export function SiteHeader({ items }: { items: NavItem[] }) {
     </nav>
   )
 }
-

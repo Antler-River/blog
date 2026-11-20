@@ -2,11 +2,9 @@
 
 import NextLink from 'next/link'
 import { useState } from 'react'
+import type { NavLink } from './SiteHeader'
 
-type Props = {
-  label: string
-  links: { label: string; href: string; newTab?: boolean | null }[]
-}
+type Props = { label: string; links: NavLink[] }
 
 export function NavDropdown({ label, links }: Props) {
   const [open, setOpen] = useState(false)

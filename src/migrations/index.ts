@@ -14,6 +14,7 @@ import * as migration_20261119_015624_add_autosave_2 from './20261119_015624_add
 import * as migration_20261120_165306_SEO_fields from './20261120_165306_SEO_fields'
 import * as migration_20261120_172126_SEO_fields from './20261120_172126_SEO_fields'
 import * as migration_20261120_175507_draft_status_fixes from './20261120_175507_draft_status_fixes'
+import * as migration_20261120_185124_site_header_refactor from './20261120_185124_site_header_refactor'
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20261120_175507_draft_status_fixes.up,
     down: migration_20261120_175507_draft_status_fixes.down,
     name: '20261120_175507_draft_status_fixes',
+  },
+  {
+    up: migration_20261120_185124_site_header_refactor.up,
+    down: migration_20261120_185124_site_header_refactor.down,
+    name: '20261120_185124_site_header_refactor',
   },
 ]
